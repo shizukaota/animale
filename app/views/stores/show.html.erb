@@ -1,0 +1,65 @@
+<html lang="ja">
+  <head>
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   </head>
+    <title> <%= @store.storename %> </title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="css/style.css" media="all">
+  </head>
+        <body>
+
+          <div class="wrap">
+       <ul id="tab-menu" class="clearfix">
+        <li><a href="#tab1" class="active"> 店舗Top</a></li>
+        <li><a href="#tab2" class="">料金システム</a></li>
+        <li><a href="#tab3" class="">メニュー</a></li>
+        <li><a href="#tab4" class="">写真</a></li>
+        <li><a href="#tab5" class="">住所</a></li>
+      </ul>
+
+      <div id="tab-contents" class="clearfix">
+        <div id="tab1" class="tab">
+          <p> てん<%= @store.storename %> <%= @store.city %> <%= @store.category %> </p>
+        </div>
+
+     <div id="tab2" class="tab">
+          <p><%= @store.system %></p>
+        </div>
+
+        <div id="tab3" class="tab">
+          <% @menus.each do |menu|  %>
+            <%= menu.drink %>
+            <%= menu.food %>
+
+
+            <% end %>
+        </div>
+
+        <div id="tab4" class="tab">
+          <% @storeimages.each do |storeimage| %>
+
+		  <%= attachment_image_tag storeimage, :image, :fill, 300,300, format: 'jpeg' %>
+		<% end %>
+        </div>
+
+     <div id="tab5" class="tab">
+          <p><%= @store.place %></p>
+        </div>
+
+      </div>
+    </div>
+<script>
+ $('#tab-contents .tab[id != "tab1"]').hide();
+
+ $('#tab-menu a').on('click', function() {
+  $("#tab-contents .tab").hide();
+  $("#tab-menu .active").removeClass("active");
+  $(this).addClass("active");
+  $($(this).attr("href")).show();
+  return false;
+});
+</script>
+
+  </html>

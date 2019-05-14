@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+         <div class="form-user style-1 rounded has-shadow-1">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<h1>個人情報編集</h1>
+                   	<%= form_for @user, url: user_path do |f| %>
+
+						<div class="actions row">
+
+							<div class="field">
+				                <%= f.label :name %><br />
+				            	<%= f.text_field :name %>
+                            </div>
+
+							<div class="field">
+				             	<%= f.label :kana %><br />
+				                <%= f.text_field :kana %>
+                            </div>
+
+				            <div class="field">
+				            	<%= f.label :email %><br />
+				            	<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+				            </div>
+
+
+				             <div class="field">
+				                <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+				                            <%= f.password_field :password, autocomplete: "new-password" %>
+				                <% if @minimum_password_length %>
+				                 <br />
+				                 <em><%= @minimum_password_length %> characters minimum</em>
+				             <% end %>
+				             </div>
+
+				             <div class="field">
+				                <%= f.label :password_confirmation %><br />
+				                <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+				             </div>
+
+				              <div class="field">
+				                 <%= f.label :current_password %> <i>(we need your current password to  changes)</i><br />
+				                 <%= f.password_field :current_password, autocomplete: "current-password" %>
+				              </div>
+
+				             <div class="actions">
+				                 <%= f.submit '保存' %>
+				             </div>
+
+
+				             <% end %>
+			</div>
+		</div>
+     </div>
+   </div>
+</div>
+

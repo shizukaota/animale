@@ -1,0 +1,39 @@
+<%= form_for(@store) do |f| %>
+<h4> 店名</h4>
+<%= f.text_field :storename %>
+
+<h4> 写真</h4>
+<%=  f.attachment_field :image %>
+<h4> 場所</h4>
+<%= f.text_field :city %>
+<h4> 動物カテゴリー</h4>
+<%= f.text_field :category %>
+<h4> 料金システム</h4>
+<%=	f.text_area :system %>
+<h4> 住所</h4>
+<%= f.text_field :place %>
+<h4> Tag</h4>
+<table>
+
+  <%= f.fields_for :storeimages do |image| %>
+   	<%= render 'storeimage_fields', f: image %>
+  <% end %>
+
+  <div class="nested-field" >
+	<%= link_to_add_association '行を追加',f,:storeimages%>
+  </div>
+
+	<%= f.fields_for :menus do |menu| %>
+   	<%= render 'menu_fields', f: menu %>
+  <% end %>
+
+  <div class="nested-field" >
+	 <%= link_to_add_association '行を追加',f,:menus %>
+  </div>
+
+ </table>
+
+<div class="actions">
+  <%= f.submit '投稿' %>
+</div>
+<% end %>

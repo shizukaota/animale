@@ -1,0 +1,69 @@
+ @charset "UTF-8";
+ 
+ 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ 
+ .main-visual {
+  width: 100%;
+  height: 300px;
+  background-image: url(image1.jpg);
+  background-size: cover; /* 縦横比を維持したまま背景の表示領域を覆うように表示 */
+}
+.main-visual-content{
+  width: 350px;
+  height: 300px;
+}
+h1{
+  text-align: center;
+  margin: 50px 0;
+}
+ 
+.wrap{
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+ 
+.clearfix:after{
+  content:"";
+  clear: both;
+  display: block;
+}
+ 
+#tab-menu li {
+  float: left;
+  list-style-type: none;
+  width: 25%;
+}
+ 
+#tab-menu a {
+  color: pink;
+  text-decoration: none;
+  display: block;
+  padding: 20px;
+  text-align: center;
+  background: #000;
+  border: 1px solid #000;
+  border-bottom: none;
+}
+ 
+#tab-menu .active {
+  background: #fff;
+  color: #000;
+}
+ 
+#tab-contents .tab {
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #000;
+  border-top: none;
+}
+ 
+#tab-contents p{
+  color:#000;
+  line-height: 2.5;
+}
