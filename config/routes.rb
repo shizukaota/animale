@@ -2,7 +2,12 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
-  resources :stores
-  resources :posts
-  resources :favorites, only:[:create, :destory, :index]
+  resources :stores do
+
+	   resources :favorites, only: [:index,:create, :destroy] do
+	   end
+
+	   resources :posts
+   end
+
 end

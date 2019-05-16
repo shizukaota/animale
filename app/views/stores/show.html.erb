@@ -1,65 +1,102 @@
+<!DOCTYPE html>
 <html lang="ja">
   <head>
-    <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   </head>
-    <title> <%= @store.storename %> </title>
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width" >
     <link rel="stylesheet" href="css/style.css" media="all">
+   <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
   </head>
         <body>
 
           <div class="wrap">
-       <ul id="tab-menu" class="clearfix">
-        <li><a href="#tab1" class="active"> 店舗Top</a></li>
-        <li><a href="#tab2" class="">料金システム</a></li>
-        <li><a href="#tab3" class="">メニュー</a></li>
-        <li><a href="#tab4" class="">写真</a></li>
-        <li><a href="#tab5" class="">住所</a></li>
-      </ul>
+             <ul id="tab-menu" class="clearfix">
+              <li><a href="#tab1" class="active"> 店舗Top</a></li>
+              <li><a href="#tab2" class="">料金システム</a></li>
+              <li><a href="#tab3" class="">メニュー</a></li>
+              <li><a href="#tab4" class="">写真</a></li>
+              <li><a href="#tab5" class="">住所</a></li>
+            </ul>
+
 
       <div id="tab-contents" class="clearfix">
         <div id="tab1" class="tab">
-          <p> てん<%= @store.storename %> <%= @store.city %> <%= @store.category %> </p>
-        </div>
+                <p> <%= @store.storename %> ( <%= @store.city %> /<%= @store.category %> )</p>
 
-     <div id="tab2" class="tab">
-          <p><%= @store.system %></p>
-        </div>
+                <% if @store.favorited_by?(current_user) %>
 
-        <div id="tab3" class="tab">
-          <% @menus.each do |menu|  %>
-            <%= menu.drink %>
-            <%= menu.food %>
+                   <li>
+                      <%= link_to store_favorites_path(@store),method: :delete,  class: "glyphicon glyphicon-heart" do%>
+                        <%= @store.favorites.count %> いいね
+                      <% end %>
+                  </li>
+                <% else %>
+                  <li>
+                    <%= link_to  store_favorite_path(@store), method: :post, class: "glyphicon glyphicon-heart" do%>
+                      <%= @store.favorites.count %> いいね
+                    <% end %>
+                  </li>
+                <% end %>
+　　　　　　　　　　　　　　　
+　　　　　　　　<%= attachment_image_tag @store,  :image, :fill, 300,300, format: 'jpeg' %>
+
+                <h2>comments</h2>
+                <% @store.posts.each do |post|  %>
+                  <p> <%= post.comment  %>  </p>
+                <% end %>
+
+          </div>
+
+              <div id="tab2" class="tab">
+
+                <p><%= @store.system %></p>
+
+                  <%= link_to new_store_post_path(@store), method: :get, class: "glyphicon glyphicon-heart" do %>
+                   <% end %>
+              </div>
 
 
-            <% end %>
-        </div>
+              <div id="tab3" class="tab">
 
-        <div id="tab4" class="tab">
-          <% @storeimages.each do |storeimage| %>
+                <% @menus.each do |menu|  %>
+                  <%= menu.drink %>
+                  <%= menu.food %>
+                <% end %>
 
-		  <%= attachment_image_tag storeimage, :image, :fill, 300,300, format: 'jpeg' %>
-		<% end %>
-        </div>
+              </div>
 
-     <div id="tab5" class="tab">
-          <p><%= @store.place %></p>
-        </div>
+              <div id="tab4" class="tab">
 
-      </div>
+               <% @storeimages.each do |storeimage| %>
+      		       <%= attachment_image_tag storeimage, :image, :fill, 300,300, format: 'jpeg' %>
+      		     <% end %>
+
+
+              </div>
+
+              <div id="tab5" class="tab">
+
+                <p><%= @store.place %></p>
+              </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+        <script>
+         $('#tab-contents .tab[id != "tab1"]').hide();
+
+         $('#tab-menu a').on('click', function() {
+          $("#tab-contents .tab").hide();
+          $("#tab-menu .active").removeClass("active");
+          $(this).addClass("active");
+          $($(this).attr("href")).show();
+          return false;
+        });
+        </script>
+
+     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
     </div>
-<script>
- $('#tab-contents .tab[id != "tab1"]').hide();
-
- $('#tab-menu a').on('click', function() {
-  $("#tab-contents .tab").hide();
-  $("#tab-menu .active").removeClass("active");
-  $(this).addClass("active");
-  $($(this).attr("href")).show();
-  return false;
-});
-</script>
-
-  </html>
+  </div>
+ </body>
+</html>
