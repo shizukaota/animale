@@ -7,6 +7,7 @@ class StoresController < ApplicationController
 
 	def create
 		store = Store.new(store_params)
+    logger.debug store.errors.inspect
 		store.save
 		redirect_to stores_path
 	end
@@ -31,13 +32,13 @@ class StoresController < ApplicationController
     	redirect_to store_path(store.id)
   end
 
-  def form
-  end
-
+    def favorited_by?(user)
+        favorites.where(user_id: user.id).exists?
+    end
    private
 
    def store_params
-   	params.require(:store).permit(:storename, :image, :city, :category, :system, :place, :tag, storeimages_attributes:[:id,:image,:_destroy ], menus_attributes:[:id, :drink, :food, :_destroy ])
+   	params.require(:store).permit(:user_id, :storename, :image, :city, :category, :system, :place, :tag,:post ,:comment, storeimages_attributes:[:id,:image,:_destroy ], menus_attributes:[:id, :drink, :food, :_destroy ])
    end
 
 end

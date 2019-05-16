@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
      "/stores"
 
     end
+     config.logger = Logger.new(STDOUT)
 
   protected
 
