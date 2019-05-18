@@ -19,6 +19,8 @@
             <h4> 住所</h4>
             <%= f.text_field :place %>
             <h4> Tag</h4>
+            <%= f.label :tag_list, 'タグをカンマ区切りで入力' %>
+            <%= text_field_tag 'store[tag_list]', @store.tag_list  %>
 
             <table>
 
@@ -27,7 +29,7 @@
               <% end %>
 
               <div class="nested-field" >
-            	<%= link_to_add_association '行を追加',f,:storeimages%>
+            	<%= link_to_add_association '写真を追加',f,:storeimages%>
               </div>
 
             	<%= f.fields_for :menus do |menu| %>
@@ -35,7 +37,7 @@
               <% end %>
 
               <div class="nested-field" >
-            	 <%= link_to_add_association '行を追加',f,:menus %>
+            	 <%= link_to_add_association 'メニューを追加',f,:menus %>
               </div>
 
              </table>
