@@ -1,6 +1,7 @@
 class StoresController < ApplicationController
 	def new
 		@store = Store.new
+    @store.tag_list = Store.where(params[:tag_list])
     @store.storeimages.build
     @store.menus.build
 	end
@@ -36,13 +37,17 @@ class StoresController < ApplicationController
     	redirect_to store_path(store.id)
   end
 
+  def tag_cloud
+    @tags = Post.tag_counts_on(:tags)
+  end
+
     def favorited_by?(user)
         favorites.where(user_id: user.id).exists?
     end
    private
 
    def store_params
-   	params.require(:store).permit(:user_id, :storename, :image, :city, :category, :system, :place, :tag,:post ,:comment, storeimages_attributes:[:id,:image,:_destroy ], menus_attributes:[:id, :drink, :food, :_destroy ])
+   	params.require(:store).permit(:user_id, :storename, :image, :city, :category, :system, :place, :tag,:post,:comment,:tag_list, storeimages_attributes:[:id,:image,:_destroy ], menus_attributes:[:id, :drink, :food, :_destroy ])
    end
 
 end

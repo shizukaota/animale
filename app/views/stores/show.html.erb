@@ -37,7 +37,11 @@
                     <% end %>
                   </li>
                 <% end %>
-                 <%= attachment_image_tag @store,  :image, :fill, 300,300, format: 'jpeg' %>
+                 <%= attachment_image_tag @store,  :image, :fill, 300,300, format: 'jpeg' %><br>
+
+           <% @store.tag_list.each do |tag| %>
+               <span style="background-color: pink; border-radius: 10px;"><%= tag %></span>
+               <% end %>
 
         </div>
 
@@ -68,7 +72,6 @@
               </div>
 
               <div id="tab5" class="tab">
-
                 <p><%= @store.place %></p>
               </div>
 
