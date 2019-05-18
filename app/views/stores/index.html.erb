@@ -1,13 +1,23 @@
-<div class="main-visual">
-    <div class="main-visual-content">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
 
-      <p class="main-visual-text">
-        welcome animale !
-        アニマーれへようこそ！
-        このサイトは動物カフェの検索サイトです🐇
-      </p>
+    <title>skippr導入</title>
+</head>
+<body>
+    <div class="container">
+        <div class="theTarget">
+            <div style="background-image: url(assets/image1.jpg)"></div>
+            <div style="background-image: url(assets/image2.jpg)"></div>
+            <div style="background-image: url(assets/image3.jpg)"></div>
+            <div style="background-image: url(assets/image4.jpg)"></div>
+            <div style="background-image: url(assets/image5.jpg)"></div>
+        </div>
     </div>
- </div>
+
+</body>
+</html>
 
  <nav class="nav-list">
  	<div class="col-lg-4" >
@@ -21,23 +31,41 @@
             <li><%= link_to " login", new_user_session_path, class: "glyphicon glyphicon-log-in sign_in" %></li>
           </ul>
         <% end %>
+        <%= search_form_for @search do |f| %>
+          <%= f.label :search  %>
+          <%= f.search_field :storename_or_city_or_category_cont %>
+
+       <div class="actions"><%= f.submit "検索" %></div>
+      <% end %>
+      <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+            ドロップダウン
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation"><a href="#">リンクのリスト２</a></li>
+            <li role="presentation"><a href="#">リンクのリスト３</a></li>
+          </ul>
+       </div>
     </div>
   </nav>
 
 
-<div class="container">
-	<h1>お店</h1>
-	<div class="row">
-		  <% @stores.each do |store| %>
+        <div class="container">
+        	<h1>お店</h1>
+        	 <div class="row">
+        		  <% @stores.each do |store| %>
 
-	     <div class="col-lg-4" >
-		     <div class="col-lg-12" >
-					店名:<%= link_to store.storename, store_path(store.id) %> (<%= link_to store.city %> /<%= link_to store.category %> )<br>
-			</div>
-		     <div class="col-lg-12" >
-		        	<%= attachment_image_tag store,  :image, :fill, 300,300, format: 'jpeg' %>
-	     	</div>
-	     </div>
-	  <% end %>
-	</div>
-  </div>
+        	     <div class="col-lg-4" >
+          		     <div class="col-lg-12" >
+          					店名:<%= link_to store.storename, store_path(store.id) %> (<%= link_to store.city %> /<%= link_to store.category %> )<br>
+          			   </div>
+
+          		     <div class="col-lg-12" >
+          		       <%= attachment_image_tag store,  :image, :fill, 300,300, format: 'jpeg' %>
+          	     	 </div>
+
+        	   </div>
+        	  <% end %>
+        	</div>
+        </div>

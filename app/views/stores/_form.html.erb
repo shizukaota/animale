@@ -1,13 +1,13 @@
-_form.html.erb
 
-   <table>
+ <table>
    	<%= form.fields_for :storeimages do |image| %>
-   	 <%= render 'storeimages_fields', f: image %>
+   	<%= render 'storeimages_fields', f: image %>
    	<% end %>
    	<div class="field" >
 	<%= link_to_add_association '行を追加',f,:storeimages %>
    </div>
-   </table>
+ </table>
+
 <div class="actions">
 <%= f.submit '投稿' %>
 </div>

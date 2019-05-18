@@ -14,7 +14,11 @@ class StoresController < ApplicationController
 
 	def index
 		@stores = Store.all
+    @search = Store.ransack(params[:q])
+    @stores = @search.result
+    @posts = Post.all
   end
+
 
   def show
     	@store = Store.find(params[:id])

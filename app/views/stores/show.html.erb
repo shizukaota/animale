@@ -26,26 +26,20 @@
                 <% if @store.favorited_by?(current_user) %>
 
                    <li>
-                      <%= link_to store_favorites_path(@store),method: :delete,  class: "glyphicon glyphicon-heart" do%>
-                        <%= @store.favorites.count %> いいね
+                      <%= link_to store_favorite_path(@store), method: :delete,  class: "glyphicon glyphicon-heart" do%>
+                       <%= @store.favorites.count %> いいね
                       <% end %>
                   </li>
                 <% else %>
                   <li>
-                    <%= link_to  store_favorite_path(@store), method: :post, class: "glyphicon glyphicon-heart" do%>
+                    <%= link_to store_favorites_path(@store), method: :post, class: "glyphicon glyphicon-heart" do%>
                       <%= @store.favorites.count %> いいね
                     <% end %>
                   </li>
                 <% end %>
-　　　　　　　　　　　　　　　
-　　　　　　　　<%= attachment_image_tag @store,  :image, :fill, 300,300, format: 'jpeg' %>
+                 <%= attachment_image_tag @store,  :image, :fill, 300,300, format: 'jpeg' %>
 
-                <h2>comments</h2>
-                <% @store.posts.each do |post|  %>
-                  <p> <%= post.comment  %>  </p>
-                <% end %>
-
-          </div>
+        </div>
 
               <div id="tab2" class="tab">
 
@@ -71,7 +65,6 @@
       		       <%= attachment_image_tag storeimage, :image, :fill, 300,300, format: 'jpeg' %>
       		     <% end %>
 
-
               </div>
 
               <div id="tab5" class="tab">
@@ -79,8 +72,6 @@
                 <p><%= @store.place %></p>
               </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
 
         <script>
          $('#tab-contents .tab[id != "tab1"]').hide();
@@ -94,8 +85,7 @@
         });
         </script>
 
-     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
+
     </div>
   </div>
  </body>
