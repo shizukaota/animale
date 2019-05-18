@@ -2,7 +2,7 @@
 class FavoritesController < ApplicationController
 
     def index
-    	@favorites = Favorite.all(user_id:current_user)
+    	@favorites = Favorite.where(user_id:current_user)
     end
 
 	def create

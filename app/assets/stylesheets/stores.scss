@@ -1,4 +1,7 @@
- @charset "UTF-8";
+.container{
+    height: 500px;
+}
+@charset "UTF-8";
  
  
 * {
@@ -7,16 +10,6 @@
   box-sizing: border-box;
 }
  
- .main-visual {
-  width: 100%;
-  height: 300px;
-  background-image: url(image1.jpg);
-  background-size: cover; /* 縦横比を維持したまま背景の表示領域を覆うように表示 */
-}
-.main-visual-content{
-  width: 350px;
-  height: 300px;
-}
 h1{
   text-align: center;
   margin: 50px 0;
@@ -41,7 +34,7 @@ h1{
 }
  
 #tab-menu a {
-  color: pink;
+  color: #fff;
   text-decoration: none;
   display: block;
   padding: 20px;

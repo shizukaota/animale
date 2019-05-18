@@ -23,10 +23,15 @@ def show
 end
 
 def edit
+    @store = Store.find(params[:id])
+    @post = Post.find(params[:id])
 end
 
 
 def updete
+    post = Post.find(params[:id])
+    post.updete
+    redirect_to stores_path
 end
 
 
