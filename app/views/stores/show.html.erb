@@ -1,56 +1,67 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
+ <body>
+  <header>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width" >
     <link rel="stylesheet" href="css/style.css" media="all">
-   <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
-  </head>
-        <body>
+  </header>
+        <!-- <body> -->
 
-          <div class="wrap">
-             <ul id="tab-menu" class="clearfix">
-              <li><a href="#tab1" class="active"> 店舗Top</a></li>
-              <li><a href="#tab2" class="">料金システム</a></li>
-              <li><a href="#tab3" class="">メニュー</a></li>
-              <li><a href="#tab4" class="">写真</a></li>
-              <li><a href="#tab5" class="">住所</a></li>
-            </ul>
+              <div class="wrap">
+                 <ul id="tab-menu" class="clearfix">
+                  <li><a href="#tab1" class="active"> 店舗Top</a></li>
+                  <li><a href="#tab2" class="">料金システム</a></li>
+                  <li><a href="#tab3" class="">メニュー</a></li>
+                  <li><a href="#tab4" class="">写真</a></li>
+                  <li><a href="#tab5" class="">地図</a></li>
+                  <li><a href="#tab6" class="">クチコミ</a></li>
+                </ul>
 
 
-      <div id="tab-contents" class="clearfix">
+  <div id="tab-contents" class="clearfix">
         <div id="tab1" class="tab">
+          <div class="col-lg-6" >
                 <p> <%= @store.storename %> ( <%= @store.city %> /<%= @store.category %> )</p>
 
                 <% if @store.favorited_by?(current_user) %>
 
                    <li>
-                      <%= link_to store_favorite_path(@store), method: :delete,  class: "glyphicon glyphicon-heart" do%>
-                       <%= @store.favorites.count %> いいね
-                      <% end %>
+                      <%= link_to store_favorite_path(@store.id), method: :delete,  class: "glyphicon glyphicon-heart-empty" do%>
+                       <%= current_user.favorites.count %> いいね
+                <% end %>
                   </li>
                 <% else %>
                   <li>
-                    <%= link_to store_favorites_path(@store), method: :post, class: "glyphicon glyphicon-heart" do%>
+                    <%= link_to store_favorites_path(@store.id), method: :post, class: "glyphicon glyphicon-heart-empty" do%>
                       <%= @store.favorites.count %> いいね
-                    <% end %>
+                <% end %>
                   </li>
                 <% end %>
                  <%= attachment_image_tag @store,  :image, :fill, 300,300, format: 'jpeg' %><br>
 
            <% @store.tag_list.each do |tag| %>
                <span style="background-color: pink; border-radius: 10px;"><%= tag %></span>
-               <% end %>
+            <% end %>
+            <% if current_user.admin? %>
+                <%= link_to"編集", edit_store_path(@store.id) %>
+                <%= link_to"削除", store_path(@store.id) %>
+            <% end %>
+          </div>
 
-        </div>
+          <div class="col-lg-6" >
+             <% @store.posts.each do |post| %>
+               <p> ニックネーム</p><%= post.user.nickname %>
+               <p> クチコミ</p><%= post.comment %>
+             <% end %>
+          </div>
+      </div>
 
               <div id="tab2" class="tab">
 
                 <p><%= @store.system %></p>
 
-                  <%= link_to new_store_post_path(@store), method: :get, class: "glyphicon glyphicon-heart" do %>
-                   <% end %>
               </div>
 
 
@@ -63,17 +74,55 @@
 
               </div>
 
-              <div id="tab4" class="tab">
-
+            <div id="tab4" class="tab">
+                <p>公式</p>
                <% @storeimages.each do |storeimage| %>
       		       <%= attachment_image_tag storeimage, :image, :fill, 300,300, format: 'jpeg' %>
       		     <% end %>
+              <p> ユーザー投稿 </p>
+               <% @store.posts.each do |post| %>
+                <%= attachment_image_tag post, :image, :fill, 100,100, format: 'jpeg' %>
+              <% end %>
+            </div>
 
-              </div>
 
-              <div id="tab5" class="tab">
+<div id="tab5" class="tab">
+
+      <div id="tab6" class="tab">
                 <p><%= @store.place %></p>
-              </div>
+
+                <%= form_for [@store,@post] do |f| %>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <%=  f.attachment_field :image %>
+                        <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+                    </div>
+               </div>
+                <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+                <% end %>
+
+                  <% @store.posts.each do |post| %>
+                      <li class="comment">
+                          <div class="comment-body bb">
+                              <div class="comment-avatar">
+                                  <div class="avatar">
+                                      <%= attachment_image_tag post, :image, :fill, 200,200, format: 'jpeg' %>
+                                  </div>
+                              </div>
+                              <div class="comment-text">
+                                  <div class="comment-author clearfix">
+                                      <a href="#" class="link-author"><%= post.user.nickname %></a>
+                                      <span class="comment-meta">
+                                        <span class="comment-date"><%= post.created_at.strftime('%Y/%m/%d') %></span>
+                                      </span>
+                                  </div>
+                                  <div class="comment-entry"> </div>
+                              </div>
+                          </div>
+                      </li>
+                  <% end %>
+        </div>
+
 
 
         <script>

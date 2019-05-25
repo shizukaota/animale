@@ -1,0 +1,14 @@
+
+
+
+        <%= search_form_for @search do |f| %>
+          <%= f.label :search  %>
+          <%= f.search_field :storename_or_city_or_category_cont %>
+
+       <div class="actions"><%= f.submit "検索" %></div>
+      <% end %>
+
+      <%= form_tag("stores", method: "get") do %>
+       <%= text_field_tag :store %>
+       <%= submit_tag("Search") %>
+      <% end %>
