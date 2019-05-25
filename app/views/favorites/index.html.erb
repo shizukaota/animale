@@ -1,9 +1,14 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="users.css">
+</head>
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="form-user style-1 rounded has-shadow-1">
 			<div class="row">
 				<div class="col-md-6 col-md-offset-3">
-					<table class="table table-striped">
 						<div class="actions row">
 
 							<h1>お気に入り一覧</h1>
@@ -13,14 +18,13 @@
 							 <% end %>
 								<p>店名 : <%= favorite.store.storename %></p>
 								<p>場所 : <%= favorite.store.city %></p>
-								<%= link_to store_favorite_path(@favorite), method: :delete,  class: "glyphicon glyphicon-heart" do%>
-							     <%= @store.favorites.count %> いいね
-							                      <% end %>
+						<%= link_to store_favorite_path(store_id: favorite.store.id,id: favorite.id), method: :delete,  class: "glyphicon glyphicon-heart" do%>
+                      		<% end %>
+                      	<% end %>
 
-							    <% end %></p>
+
 
                        </div>
-					</table>
 				</div>
 			</div>
 		</div>

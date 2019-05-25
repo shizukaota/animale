@@ -1,13 +1,13 @@
-
 class FavoritesController < ApplicationController
-
+ before_action :authenticate_user!
     def index
     	@favorites = Favorite.where(user_id:current_user)
     end
 
 	def create
+         user = current_user
          store = Store.find(params[:store_id])
-         favorite = current_user.favorites.new(store_id: store.id)
+         favorite = current_user.favorite.new(store_id: store.id)
          favorite.save
          redirect_to store_path(store)
     end
@@ -19,8 +19,8 @@ class FavoritesController < ApplicationController
          redirect_to store_path(store)
      end
 
-def _paramas
-  params.require(:post ).permit(:user_id,:store_id,:comment)
+def paramas
+    params.require(:favorite ).permit(:user_id,:store_id )
 end
 
 end

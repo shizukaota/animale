@@ -18,9 +18,12 @@
             <%=	f.text_area :system %>
             <h4> 住所</h4>
             <%= f.text_field :place %>
+            <h4> 電話番号</h4>
+            <%= f.text_field :phone_number %>
             <h4> Tag</h4>
             <%= f.label :tag_list, 'タグをカンマ区切りで入力' %>
-            <%= text_field_tag 'store[tag_list]', @store.tag_list  %>
+            <%= text_field_tag 'store[tag_list]', @store.tag_list %>
+            <!-- <% f.text_field :tag_list, value: @store.tag_list %> -->
 
             <table>
 

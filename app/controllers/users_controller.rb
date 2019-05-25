@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+   before_action :authenticate_user!, only: [:show, :edit, :update, :destroy  ]
 
   def index
     @users = User.all
@@ -29,7 +30,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    redirect_to store_path
+    user = User.find(params[:id])
+    user.destroy
+    redirect_to stores_path
   end
 
   private

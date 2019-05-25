@@ -11,7 +11,7 @@
 						<p><%= @user.kana %></p>
 						<p><%= @user.email %></p>
 						<p><%= @user.password %></p>
-
+                        <%= link_to "削除", user_path(@user.id), method: :delete %>
  						<%= link_to "編集", edit_user_path(@user.id) %>
 
 		            </div>
