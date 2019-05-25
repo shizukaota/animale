@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Animale</title>
-    <%= csrf_meta_tags %>
+<!-- <p><img src="" alt="サンプル"></p>
+<a href="index.html"><img src="icon.jpeg" alt="サンプル"></a> -->
+<head>
+<title>  Animale </title>
     <%= csp_meta_tag %>
-
+    <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'  %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
+　　
+</head>
+<header >
+    <div class="container">
+    <span> <%= link_to "Animale ", root_path %></span>
+<nav class="nav-list-rigth">
+  <div class="col-lg-9" >
+        <% if user_signed_in? %>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+              Mypage
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li role="presentation"><a href="#"></a> <%= link_to "クチコミ", user_posts_path(current_user.id), method: :get%>  </li>
+              <li role="presentation"><a href="#"></a> <%= link_to "お気に入り", user_favorites_path(current_user.id), method: :get%> </li>
+              <li role="presentation"><a href="#"></a> <%= link_to "マイページ", user_path(current_user.id), method: :get %> </li>
+             <li><%= link_to " logout", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %></li>
+        <% end %>
+
+            <% if current_user.admin? %>
+              <li><%= link_to " 顧客一覧", users_path %> </li>
+              <li><%= link_to " お店登録", new_store_path %> </li>
+            </ul>
+          </div>
+        <% else %>
+          <ul class="nav navbar-nav navbar-navbar-rigth">
+            <li><%= link_to " signup", new_user_registration_path, class: "glyphicon glyphicon-edit sign_up" %></li>
+            <li><%= link_to " login", new_user_session_path, class: "glyphicon glyphicon-log-in sign_in" %></li>
+          </ul>
+        <% end %>
+     </div>
+  </nav>
+</div>
+
+</header>
 
   <body>
     <%= yield %>

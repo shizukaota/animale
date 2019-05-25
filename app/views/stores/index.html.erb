@@ -2,70 +2,58 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-
-    <title>skippr導入</title>
 </head>
+    <title>skippr導入</title>
 <body>
     <div class="container">
         <div class="theTarget">
-            <div style="background-image: url(assets/image1.jpg)"></div>
-            <div style="background-image: url(assets/image2.jpg)"></div>
-            <div style="background-image: url(assets/image3.jpg)"></div>
-            <div style="background-image: url(assets/image4.jpg)"></div>
-            <div style="background-image: url(assets/image5.jpg)"></div>
+            <div style="background-image: url(image1.jpg)"></div>
+            <div style="background-image: url(image2.jpg)"></div>
+            <div style="background-image: url(image3.jpg)"></div>
+            <div style="background-image: url(image4.jpg)"></div>
+            <div style="background-image: url(image5.jpg)"></div>
         </div>
     </div>
 
 </body>
 </html>
 
- <nav class="nav-list">
- 	<div class="col-lg-4" >
-        <% if user_signed_in? %>
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to " logout", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %></li>
-          </ul>
-        <% else %>
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to " signup", new_user_registration_path, class: "glyphicon glyphicon-edit sign_up" %></li>
-            <li><%= link_to " login", new_user_session_path, class: "glyphicon glyphicon-log-in sign_in" %></li>
-          </ul>
+<p class="bg-danger">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12" >
+      	<h1>お店</h1>
+          <%= form_tag("/tagsearchs", method: "post") do %>
+            <%= label_tag(:q, "タグ検索:") %>
+            <%= text_field_tag(:q) %>
+            <%= submit_tag("Search") %>
+          <% end %>
+
+
+          <%= search_form_for @search, url: wordsearchs_path, html: { method: :post } do |f| %>
+            # storenameカラムに対して部分一致検索ができる
+            <%= f.label :storename_cont, "商品名を含む" %>
+            <%= f.search_field :storename_cont %>
+
+            # 検索ボタン
+            <div class="actions"><%= f.submit "検索" %></div>
+          <% end %>
+
+   <!--  <div id="tag_cloud">
+        <% tag_cloud Store.tag_counts, %w{s m l} do |tag, css_class| %>
         <% end %>
-        <%= search_form_for @search do |f| %>
-          <%= f.label :search  %>
-          <%= f.search_field :storename_or_city_or_category_cont %>
+</div> --><% @stores.each do |store| %>
+              <div class="col-lg-6" >
 
-       <div class="actions"><%= f.submit "検索" %></div>
-      <% end %>
-      <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-            ドロップダウン
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li role="presentation"><a href="#">リンクのリスト２</a></li>
-            <li role="presentation"><a href="#">リンクのリスト３</a></li>
-          </ul>
-       </div>
+                  <%= link_to store.storename,store_path(store.id) %> (<%= store.city %> /<%= store.category %>)<br>
+                  <%= attachment_image_tag store, :image, :fill, 300,300, format: 'jpeg' %><br>
+                  <%= store.tag_list %>
+                  <% store.tag_list.each do |tag| %>
+                    <span style="background-color: pink; border-radius: 10px;"><%= tag %></span>
+                  <% end %>
+              </div>
+            <% end %>
+      </div>
     </div>
-  </nav>
-
-
-        <div class="container">
-        	<h1>お店</h1>
-        	 <div class="row">
-        		  <% @stores.each do |store| %>
-
-        	     <div class="col-lg-4" >
-          		     <div class="col-lg-12" >
-          					店名:<%= link_to store.storename, store_path(store.id) %> (<%= link_to store.city %> /<%= link_to store.category %> )<br>
-          			   </div>
-
-          		     <div class="col-lg-12" >
-          		       <%= attachment_image_tag store,  :image, :fill, 300,300, format: 'jpeg' %><br>
-          	     	 </div>
-
-        	   </div>
-        	  <% end %>
-        	</div>
-        </div>
+  </div>
+<p/>

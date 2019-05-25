@@ -8,7 +8,8 @@ class CreateStores < ActiveRecord::Migration[5.2]
       t.string :menu
       t.string :image_id
       t.string :place
-      t.string :tag
+      t.string :tag_list
+      t.integer :phone_number
       t.timestamps
     end
   end

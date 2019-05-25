@@ -1,0 +1,33 @@
+
+[1mFrom:[0m /vagrant/animale/app/controllers/stores_controller.rb @ line 32 StoresController#index:
+
+    [1;34m15[0m: 	[32mdef[0m [1;34mindex[0m
+    [1;34m16[0m: 		[1;34m# @stores = Store.all[0m
+    [1;34m17[0m:   [1;34m#   @search = Store.ransack(params[:q])[0m
+    [1;34m18[0m:   [1;34m#   @q = @search.result(distinct: true)[0m
+    [1;34m19[0m: 
+    [1;34m20[0m:   [1;34m#   @q = Store.tagged_with(params[:tag_list])[0m
+    [1;34m21[0m: 
+    [1;34m22[0m: [1;34m# Store.where('tag_list LIKE ?', "%#{params[:tag_list]}%")[0m
+    [1;34m23[0m:  [1;34m# @q = Store.tagged_with(params[:tag_list])[0m
+    [1;34m24[0m:    [1;34m# Store.tagged_with([params[:search_tag]], :match_all => true)[0m
+    [1;34m25[0m: 
+    [1;34m26[0m: 
+    [1;34m27[0m: groupings = []  [1;34m# 空配列生成[0m
+    [1;34m28[0m: 
+    [1;34m29[0m:  [32mif[0m params[[33m:q[0m].present?
+    [1;34m30[0m: [1;34m# binding.pry[0m
+    [1;34m31[0m:    keywords = params[[33m:q[0m][[33m:tags_name_cont[0m].split([35m[1;35m/[0m[35m[[1;35m\p[0m[35m{blank}[1;35m\s[0m[35m]+[1;35m/[0m[35m[0m)
+ => [1;34m32[0m:  binding.pry
+    [1;34m33[0m:    keywords.each { |value| groupings.push([35mtags_name_cont[0m: value) }
+    [1;34m34[0m: [1;34m# binding.pry[0m
+    [1;34m35[0m: 
+    [1;34m36[0m:  [32mend[0m
+    [1;34m37[0m: @search = [1;34;4mStore[0m.ransack(
+    [1;34m38[0m:         [35mcombinator[0m: [31m[1;31m'[0m[31mand[1;31m'[0m[31m[0m,
+    [1;34m39[0m:         [35mgroupings[0m: groupings )
+    [1;34m40[0m: 
+    [1;34m41[0m: @q = @search.result([35mdistinct[0m: [1;36mtrue[0m)
+    [1;34m42[0m: 
+    [1;34m43[0m: [32mend[0m
+

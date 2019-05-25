@@ -1,9 +1,24 @@
-<li>
-  <i class="fa fa-comment"></i>
-  <a href="#comments"><%= @store.post.count %></a>
-</li>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="users.css">
+</head>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+         <div class="form-user style-1 rounded has-shadow-1">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
 
-<div class="comment-list bt style-2" id="comments">
-    <div class="float-wrapper">
-        <h2 class="comment-count"><%= @store.post.count %>件コメント</h2>
+					<li>
+					  <i class="fa fa-comment"></i>
+					  <a href="#comments"><%= @post.comment %></a>
+					  <%= link_to "edit", edit_user_post_path(current_user.id), method: :get %>
+					</li>
+
+                </div>
+		    </div>
+        </div>
     </div>
+</div>
+

@@ -1,9 +1,10 @@
 .container{
-    height: 500px;
+    height: 100px;
+    width: 70%;
 }
 @charset "UTF-8";
- 
- 
+
+
 * {
   margin: 0;
   padding: 0;
@@ -33,30 +34,34 @@ h1{
   width: 25%;
 }
  
+#tab-menu{
+
+ border: 1px solid pink;
+}
+
 #tab-menu a {
-  color: #fff;
+  color: pink;
   text-decoration: none;
   display: block;
   padding: 20px;
   text-align: center;
-  background: #000;
-  border: 1px solid #000;
+  background: white;
   border-bottom: none;
 }
  
 #tab-menu .active {
-  background: #fff;
-  color: #000;
+  background: pink;
+  color: white;
 }
  
 #tab-contents .tab {
   padding: 30px;
   background: #fff;
-  border: 1px solid #000;
+  /*border: 1px solid #000;*/
   border-top: none;
 }
  
 #tab-contents p{
-  color:#000;
+  color:white;
   line-height: 2.5;
 }

@@ -1,19 +1,45 @@
-<h1> お店編集 </h1>
-<%= form_for (@store) do |f| %>
-<h4> 店名</h4>
-<%= f.text_field :storename %>
+!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="users.css">
+</head>
+	<body>
+	  <div class="row">
+		<div class="col-md-8 col-md-offset-2">
+		  <div class="form-user style-1 rounded has-shadow-1">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+				  <div class="actions row">
+				    <div class="box">
 
-<h4> 写真</h4>
-<%=  f.attachment_field :image %>
-<h4> 場所</h4>
-<%= f.text_field :city %>
-<h4> 動物カテゴリー</h4>
-<%= f.text_field :category %>
-<h4> 料金システム</h4>
-<%=	f.text_area :system %>
-<h4> 住所</h4>
-<%= f.text_field :place %>
-<h4> Tag</h4>
+						<h1> お店編集 </h1>
+						<%= form_for (@store) do |f| %>
+						<h4> 店名</h4>
+						<%= f.text_field :storename %>
 
-<%= f.submit '保存' %>
-<% end %>
+						<h4> 写真</h4>
+						<%=  f.attachment_field :image %>
+						<h4> 場所</h4>
+						<%= f.text_field :city %>
+						<h4> 動物カテゴリー</h4>
+						<%= f.text_field :category %>
+						<h4> 料金システム</h4>
+						<%=	f.text_area :system %>
+						<h4> 住所</h4>
+						<%= f.text_field :place %>
+						<h4> Tag</h4>
+
+						<%= f.submit '保存' %>
+						<% end %>
+
+                  </div>
+				</div>
+			 </div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </body>
+</html>
+

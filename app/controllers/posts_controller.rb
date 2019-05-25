@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-
+before_action :authenticate_user!
 def new
 	@store = Store.find(params[:store_id])
     @post = Post.new
@@ -7,9 +7,7 @@ end
 
 def create
 	@store = Store.find(params[:store_id])
-	# @storeに親モデルのstoreのidを入れる（rouring)
     post = Post.new(post_params)
-    #post は新しいpost(パラメーターで送られてきた情報を入れる)
     post.user_id = current_user.id
     post.store_id = @store.id
     post.save
@@ -23,15 +21,15 @@ def show
 end
 
 def edit
-    @store = Store.find(params[:id])
+    @user = User.find(params[:user_id])
     @post = Post.find(params[:id])
 end
 
 
-def updete
+def update
     post = Post.find(params[:id])
-    post.updete
-    redirect_to stores_path
+    post.update(post_params)
+    redirect_to post_path(post)
 end
 
 
@@ -39,11 +37,22 @@ def index
 	@posts = Post.all
 end
 
+def destroy
+    post = Post.find(params[:id])
+    post.destroy
+    redirect_to post_path(post)
+end
+
+
+
+def list
+end
+
 private
 
 
 def post_params
-  params.require(:post).permit(:user_id,:store_id,:comment)
+  params.require(:post).permit(:user_id,:store_id,:comment, :image)
 end
 
 end
