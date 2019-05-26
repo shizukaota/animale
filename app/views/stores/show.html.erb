@@ -15,8 +15,7 @@
                   <li><a href="#tab2" class="">料金システム</a></li>
                   <li><a href="#tab3" class="">メニュー</a></li>
                   <li><a href="#tab4" class="">写真</a></li>
-                  <li><a href="#tab5" class="">地図</a></li>
-                  <li><a href="#tab6" class="">クチコミ</a></li>
+                  <li><a href="#tab5" class="">クチコミ</a></li>
                 </ul>
 
 
@@ -85,10 +84,7 @@
               <% end %>
             </div>
 
-
-<div id="tab5" class="tab">
-
-      <div id="tab6" class="tab">
+      <div id="tab5" class="tab">
                 <p><%= @store.place %></p>
 
                 <%= form_for [@store,@post] do |f| %>
@@ -101,6 +97,7 @@
                 <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
                 <% end %>
 
+              <ol>
                   <% @store.posts.each do |post| %>
                       <li class="comment">
                           <div class="comment-body bb">
@@ -121,6 +118,7 @@
                           </div>
                       </li>
                   <% end %>
+              </ol>
         </div>
 
 

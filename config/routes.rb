@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  root 'stores#index'
 
   devise_for :users
+  root 'stores#index'
+
   resources :users do
 
-     resources :favorites, only: [:index,:destroy]
+     resources :favorites, only: [:index,:destroy, :create]
 
      resources :posts, only: [:create, :index,:edit,:update,:destroy]
    end

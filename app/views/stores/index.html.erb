@@ -30,13 +30,10 @@
           <% end %>
 
 
-          <%= search_form_for @search, url: wordsearchs_path, html: { method: :post } do |f| %>
-            # storenameカラムに対して部分一致検索ができる
-            <%= f.label :storename_cont, "商品名を含む" %>
-            <%= f.search_field :storename_cont %>
+          <%= search_form_for @search, url: searchresult_path do |f| %>
 
-            # 検索ボタン
-            <div class="actions"><%= f.submit "検索" %></div>
+            <%= f.label :storename_cout, "商品名を含む" %>
+            <%= f.search_field :storename_or_city_or_category_cont %><div class="actions"><%= f.submit "検索" %></div>
           <% end %>
 
    <!--  <div id="tag_cloud">
@@ -48,9 +45,9 @@
                   <%= link_to store.storename,store_path(store.id) %> (<%= store.city %> /<%= store.category %>)<br>
                   <%= attachment_image_tag store, :image, :fill, 300,300, format: 'jpeg' %><br>
                   <%= store.tag_list %>
-                  <% store.tag_list.each do |tag| %>
+                 <!--  <% store.tag_list.each do |tag| %>
                     <span style="background-color: pink; border-radius: 10px;"><%= tag %></span>
-                  <% end %>
+                  <% end %> -->
               </div>
             <% end %>
       </div>

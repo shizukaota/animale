@@ -1,18 +1,14 @@
 class SearchsController < ApplicationController
 
   def index
-  	p "-------------------"
-  	p "flg"
-  	p params[:flg]
   	if params[:flg] == "tag"
 	  @searchresult = Store.tagged_with(params[:pm])
- 	else
-  p params[:pm]
- 	  @search = Store.ransack(params[:pm])
-      @searchresult = @search.result
-
+   else
+ 	  @search = Store.ransack(params[:q])
+    @searchresult = @search.result
+    end
   end
-end
+
 
   def wordsearch
   	p "word"
