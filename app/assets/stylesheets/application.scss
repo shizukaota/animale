@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
@@ -33,13 +34,10 @@
 	font-size: 32px;
 }
 
-header  {
-	/*position: relative;*/
-	color: white;
-	font-size: 32px;
-}
+
 .container {
 	color: white;
+  padding-left: 100px;
 }
 /*.social {
   position: absolute;
@@ -51,7 +49,22 @@ body {
   width: 100%;
   height: 100%;
   background-image: url(image10.jpg);
-  /*background-color: blue;*/
   background-position: center;
   background-size:cover;
+}
+
+.test1{
+  background-image: url(image1.jpg);
+}
+.test2{
+  background-image: url(image2.jpg);
+}
+.test3{
+  background-image: url(image3.jpg);
+}
+.test4{
+  background-image: url(image4.jpg);
+}
+.test5{
+  background-image: url(image5.jpg);
 }

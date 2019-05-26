@@ -2,38 +2,37 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-
     <title>skippr導入</title>
 </head>
 <body>
-    <div class="container">
+    <div class="skipper_container">
         <div class="theTarget">
-            <div style="background-image: url(assets/image1.jpg)"></div>
-            <div style="background-image: url(assets/image2.jpg)"></div>
-            <div style="background-image: url(assets/image3.jpg)"></div>
-            <div style="background-image: url(assets/image4.jpg)"></div>
-            <div style="background-image: url(assets/image5.jpg)"></div>
+            <div class="test1"></div>
+            <div class="test2"></div>
+            <div class="test3"></div>
+            <div class="test4"></div>
+            <div class="test5"></div>
         </div>
     </div>
 
 </body>
+
 </html>
     <div class="container">
        <div class="row">
          <div class="col-lg-12" >
-         <%= paginate @searchresult, class: "paginate" %>
-        	<h1>お店</h1>
-      	 <div class="row">
-              <% @searchresult.each do |result| %>
+    <h1>お店</h1>
+              <% @searchresults.each do |result| %>
                 <div class="col-lg-6" >
-                <p><%= result.storename %>(<%= result.city %> /<%= result.category %>)</p>
+                <%= link_to result.storename, store_path(result) %> (<%= result.city %> /<%= result.category %>)</p>
                 <%= attachment_image_tag result, :image,  :fill, 300,300, format: 'jpeg'  %><br>
 
                 <% result.tag_list.each do |tag| %>
                     <span style="background-color: pink; border-radius: 10px;"><%= tag %></span>
                 <% end %>
-              <% end %>
           </div>
+          <% end %>
     	</div>
     </div>
 
+<%= paginate @searchresults, class: "paginate" %>
