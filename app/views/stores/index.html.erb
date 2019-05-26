@@ -7,17 +7,16 @@
 <body>
     <div class="container">
         <div class="theTarget">
-            <div style="background-image: url(image1.jpg)"></div>
-            <div style="background-image: url(image2.jpg)"></div>
-            <div style="background-image: url(image3.jpg)"></div>
-            <div style="background-image: url(image4.jpg)"></div>
-            <div style="background-image: url(image5.jpg)"></div>
+            <div style="background-image: url(assets/image1.jpg)"></div>
+            <div style="background-image: url(assets/image2.jpg)"></div>
+            <div style="background-image: url(assets/image3.jpg)"></div>
+            <div style="background-image: url(assets/image4.jpg)"></div>
+            <div style="background-image: url(assets/image5.jpg)"></div>
         </div>
     </div>
 
 </body>
 </html>
-
 <p class="bg-danger">
   <div class="container">
     <div class="row">
@@ -36,21 +35,20 @@
             <%= f.search_field :storename_or_city_or_category_cont %><div class="actions"><%= f.submit "検索" %></div>
           <% end %>
 
-   <!--  <div id="tag_cloud">
-        <% tag_cloud Store.tag_counts, %w{s m l} do |tag, css_class| %>
-        <% end %>
-</div> --><% @stores.each do |store| %>
+
+            <% @stores.each do |store| %>
               <div class="col-lg-6" >
 
                   <%= link_to store.storename,store_path(store.id) %> (<%= store.city %> /<%= store.category %>)<br>
                   <%= attachment_image_tag store, :image, :fill, 300,300, format: 'jpeg' %><br>
-                  <%= store.tag_list %>
-                 <!--  <% store.tag_list.each do |tag| %>
+
+                  <% store.tag_list.each do |tag| %>
                     <span style="background-color: pink; border-radius: 10px;"><%= tag %></span>
-                  <% end %> -->
+                  <% end %>
               </div>
             <% end %>
       </div>
     </div>
   </div>
 <p/>
+<%= paginate @stores, class: "paginate" %>

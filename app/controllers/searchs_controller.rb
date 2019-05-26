@@ -2,10 +2,10 @@ class SearchsController < ApplicationController
 
   def index
   	if params[:flg] == "tag"
-	  @searchresult = Store.tagged_with(params[:pm])
+	  @searchresult = Store.tagged_with(params[:pm]).page(params[:page]).reverse_order
    else
  	  @search = Store.ransack(params[:q])
-    @searchresult = @search.result
+    @searchresult = @search.result.page(params[:page]).reverse_order
     end
   end
 

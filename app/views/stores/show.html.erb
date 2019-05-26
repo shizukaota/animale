@@ -64,18 +64,18 @@
               </div>
 
 
-              <div id="tab3" class="tab">
-
-                <% @menus.each do |menu|  %>
+            <div id="tab3" class="tab">
+             <p>メニュー一覧</p>
+             <% @store.menus.each do |menu|  %>
                   <%= menu.drink %>
                   <%= menu.food %>
-                <% end %>
+              <% end %>
 
-              </div>
+            </div>
 
             <div id="tab4" class="tab">
                 <p>公式</p>
-               <% @storeimages.each do |storeimage| %>
+               <% @store.storeimages.each do |storeimage| %>
       		       <%= attachment_image_tag storeimage, :image, :fill, 300,300, format: 'jpeg' %>
       		     <% end %>
               <p> ユーザー投稿 </p>
@@ -85,7 +85,7 @@
             </div>
 
       <div id="tab5" class="tab">
-                <p><%= @store.place %></p>
+          <p><%= @store.place %></p>
 
                 <%= form_for [@store,@post] do |f| %>
                 <div class="row">
@@ -93,7 +93,7 @@
                         <%=  f.attachment_field :image %>
                         <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
                     </div>
-               </div>
+                </div>
                 <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
                 <% end %>
 

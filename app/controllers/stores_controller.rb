@@ -2,8 +2,6 @@ class StoresController < ApplicationController
 
 	def new
 		@store = Store.new
-    # @store.tag_list = Store.where(params[:tag_list])
-    # @store.tag_list.add(params[:tag_list]).split
     tags = params[:tag_list]
     @store.tag_list = tags
     @store.storeimages.build
@@ -20,45 +18,14 @@ class StoresController < ApplicationController
 
 
   def index
-    # if params[:q].present?
+
      @search = Store.ransack(params[:q])
-    # @results = @search.result
+     @stores = Store.page(params[:page]).reverse_order
 
-    # # タグ検索
-    # @tag_search = Store.tagged_with(params[:tag_list])
-
-   # else
-    @stores = Store.all
-   # end
   end
 
   def search
-
-    groupings = []  # 空配列生成
     @tag_search = Store.tagged_with(params[:q])
-    # @tag_search = Store.tagged_with(params[:tag_list])
-
-    # if params[:q].present?
-    #   # binding.pry
-    #   keywords = params[:q][:tags_name_cont].split(/[\p{blank}\s]+/)
-    #    # binding.pry
-    #   keywords.each { |value| groupings.push(tags_name_cont: value) }
-    #   # binding.pry
-    #   @search = Store.ransack( combinator: 'or', groupings: groupings )
-    #    # binding.pry
-    #   @stores = @search.result(distinct: true)
-
-
-    # elsif 
-
-    #  @search = Store.ransack(params[:q])
-    #  @c = @search.result(distinct: true)
-
-    # else
-    #  @stores = Store.all
-
-    # end
-    # binding.pry
     redirect_to searchs_path
   end
 
@@ -66,7 +33,7 @@ class StoresController < ApplicationController
   def show
    @store = Store.find(params[:id])
    @storeimages = Storeimage.where(params[:image_id])
-   @menus = Menu.where(params[:food])
+   @menus = Menu.where(params[:menu])
    @post = Post.new
  end
 
