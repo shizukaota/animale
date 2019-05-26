@@ -1,15 +1,12 @@
 class ApplicationController < ActionController::Base
-   Refile.secret_key = '3aa4e7850d7fa8c66e21f82e3410c636538c97a20c66c6ebc4dabd4c84be636e35db03688eea7636d9de25e38da23f94f714973e0d1ae610c8bb2919c8e6b589'
-    protect_from_forgery with: :null_session
     before_action :configure_permitted_parameters, if: :devise_controller?
 
     def after_sign_in_path_for(resource)
-    "root_path"
+    root_path
     end
 
     def after_sign_out_path_for(resource)
-     "root_path"
-
+     root_path
     end
      config.logger = Logger.new(STDOUT)
 
