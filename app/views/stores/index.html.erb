@@ -5,36 +5,32 @@
 </head>
     <title>skippr導入</title>
 <body>
-    <div class="container">
+        <div class="skipper_container">
         <div class="theTarget">
-            <div style="background-image: url(assets/image1.jpg)"></div>
-            <div style="background-image: url(assets/image2.jpg)"></div>
-            <div style="background-image: url(assets/image3.jpg)"></div>
-            <div style="background-image: url(assets/image4.jpg)"></div>
-            <div style="background-image: url(assets/image5.jpg)"></div>
+          <div class="test1"></div>
+            <div class="test2"></div>
+            <div class="test3"></div>
+            <div class="test4"></div>
+            <div class="test5"></div>
+
         </div>
     </div>
-
 </body>
 </html>
 <p class="bg-danger">
   <div class="container">
     <div class="row">
       <div class="col-lg-12" >
-      	<h1>お店</h1>
+        <h1>お店</h1>
           <%= form_tag("/tagsearchs", method: "post") do %>
             <%= label_tag(:q, "タグ検索:") %>
             <%= text_field_tag(:q) %>
             <%= submit_tag("Search") %>
           <% end %>
 
-
           <%= search_form_for @search, url: searchresult_path do |f| %>
-
-            <%= f.label :storename_cout, "商品名を含む" %>
-            <%= f.search_field :storename_or_city_or_category_cont %><div class="actions"><%= f.submit "検索" %></div>
+            <%= f.label :storename_cout, "キーワード検索:" %> <%= f.search_field :storename_or_city_or_category_cont %><div class="actions"><%= f.submit "検索" %></div>
           <% end %>
-
 
             <% @stores.each do |store| %>
               <div class="col-lg-6" >
@@ -47,8 +43,8 @@
                   <% end %>
               </div>
             <% end %>
+            <%= paginate @stores, class: "paginate" %>
       </div>
     </div>
   </div>
 <p/>
-<%= paginate @stores, class: "paginate" %>

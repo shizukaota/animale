@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-   before_action :authenticate_user!, only: [:show, :edit, :update, :destroy  ]
+   before_action :correct_user,  only: [:show, :edit, :update, :destroy ]
+
 
   def index
     @users = User.all
@@ -26,13 +27,14 @@ class UsersController < ApplicationController
   def update
   	user = User.find(params[:id])
     user.update(user_params)
-    redirect_to user_user_path(user.id)
+    redirect_to user_path(user.id)
   end
 
   def destroy
     user = User.find(params[:id])
     user.destroy
-    redirect_to stores_path
+    binding.pry
+    redirect_to stores_path(store)
   end
 
   private
@@ -41,4 +43,10 @@ class UsersController < ApplicationController
         params.require(:user).permit(:name, :email, :kana, :nickname )
   end
 
+  def correct_user
+    user = User.find(params[:id])
+    if current_user != user
+      redirect_to root_path
+    end
+  end
 end

@@ -23,39 +23,42 @@
         <div id="tab1" class="tab">
           <div class="col-lg-6" >
                 <p> <%= @store.storename %> ( <%= @store.city %> /<%= @store.category %> )</p>
+                <% if user_signed_in? %>
+                  <% if @store.favorited_by?(current_user) %>
 
-                <% if @store.favorited_by?(current_user) %>
-
-                   <li>
-                      <%= link_to store_favorite_path(@store.id), method: :delete,  class: "glyphicon glyphicon-heart-empty" do%>
-                       <%= current_user.favorites.count %> いいね
+                     <li>
+                        <%= link_to store_favorite_path(@store.id), method: :delete,  class: "glyphicon glyphicon-heart-empty" do%>
+                         <%= current_user.favorites.count %> いいね
+                  <% end %>
+                    </li>
+                  <% else %>
+                    <li>
+                      <%= link_to store_favorites_path(@store.id), method: :post, class: "glyphicon glyphicon-heart-empty" do%>
+                        <%= current_user.favorites.count %> いいね
+                  <% end %>
+                    </li>
+                  <% end %>
                 <% end %>
-                  </li>
-                <% else %>
-                  <li>
-                    <%= link_to store_favorites_path(@store.id), method: :post, class: "glyphicon glyphicon-heart-empty" do%>
-                      <%= @store.favorites.count %> いいね
-                <% end %>
-                  </li>
-                <% end %>
-                 <%= attachment_image_tag @store,  :image, :fill, 300,300, format: 'jpeg' %><br>
+                      <%= attachment_image_tag @store,  :image, :fill, 300,300, format: 'jpeg' %><br>
 
            <% @store.tag_list.each do |tag| %>
                <span style="background-color: pink; border-radius: 10px;"><%= tag %></span>
             <% end %>
-            <% if current_user.admin? %>
-                <%= link_to"編集", edit_store_path(@store.id) %>
-                <%= link_to"削除", store_path(@store.id) %>
-            <% end %>
-          </div>
+            <% if user_signed_in? %>
+              <% if current_user.admin? %>
+                  <%= link_to"編集", edit_store_path(@store.id) %>
+                  <%= link_to"削除", store_path(@store.id) %>
+              <% end %>
+            </div>
 
-          <div class="col-lg-6" >
-             <% @store.posts.each do |post| %>
-               <p> ニックネーム</p><%= post.user.nickname %>
-               <p> クチコミ</p><%= post.comment %>
-             <% end %>
-          </div>
-      </div>
+            <div class="col-lg-6" >
+               <% @store.posts.each do |post| %>
+                 <p> ニックネーム</p><%= post.user.nickname %>
+                 <p> クチコミ</p><%= post.comment %>
+               <% end %>
+            <% end %>
+            </div>
+        </div>
 
               <div id="tab2" class="tab">
 

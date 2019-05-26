@@ -13,6 +13,7 @@
 					<li>
 					  <i class="fa fa-comment"></i>
 					  <a href="#comments"><%= @post.comment %></a>
+					  <%= attachment_image_tag @post, :image, :fill, 200,200, format: 'jpeg' %>
 					  <%= link_to "edit", edit_user_post_path(current_user.id), method: :get %>
 					</li>
 

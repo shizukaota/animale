@@ -1,4 +1,6 @@
 class StoresController < ApplicationController
+  before_action :admin_user, only:[:destroy, :new, :create,:update,:edit ]
+
 
 	def new
 		@store = Store.new
@@ -18,10 +20,8 @@ class StoresController < ApplicationController
 
 
   def index
-
-     @search = Store.ransack(params[:q])
-     @stores = Store.page(params[:page]).reverse_order
-
+    @search = Store.ransack(params[:q])
+    @stores = Store.page(params[:page]).reverse_order
   end
 
   def search
@@ -31,11 +31,11 @@ class StoresController < ApplicationController
 
 
   def show
-   @store = Store.find(params[:id])
-   @storeimages = Storeimage.where(params[:image_id])
-   @menus = Menu.where(params[:menu])
-   @post = Post.new
- end
+     @store = Store.find(params[:id])
+     @storeimages = Storeimage.where(params[:image_id])
+     @menus = Menu.where(params[:menu])
+     @post = Post.new
+  end
 
  def edit
    @store = Store.find(params[:id])
@@ -44,15 +44,22 @@ class StoresController < ApplicationController
  def update
    store = Store.find(params[:id])
    store.update(store_params)
-
    redirect_to store_path(store.id)
  end
 
  def destroy
     store = Store.find(params[:id])
     store.destroy
-    redirect_to store_path(post)
+    redirect_to store_path(store)
  end
+
+
+def login_check
+   unless user_signed_in?
+    flash[:alert] = "ログインしてください"
+    redirect_to root_path
+   end
+end
 
  def favorited_by?(user)
   favorites.where(user_id: user.id).exists?
@@ -60,12 +67,6 @@ end
 
 private
 
-def login_check
-  unless user_signed_in?
-    flash[:alert] = "ログインしてください"
-    redirect_to root_path
-  end
-end
 
 def admin_user
     redirect_to(root_path) unless current_user.admin?

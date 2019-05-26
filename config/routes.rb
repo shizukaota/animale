@@ -18,6 +18,5 @@ Rails.application.routes.draw do
   post 'tagsearchs' => 'searchs#tagsearch'
   post 'wordsearchs' => 'searchs#wordsearch'
   get 'searchresult' => 'searchs#index'
-   # get 'tags/:tag', to: 'stores#search', as: :tag_list
-   get 'lists' => 'posts#list'
+  get 'lists' => 'posts#list'
 end
