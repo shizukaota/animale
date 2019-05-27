@@ -33,8 +33,7 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     user.destroy
-    binding.pry
-    redirect_to stores_path(store)
+    redirect_to root_path
   end
 
   private

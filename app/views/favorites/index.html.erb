@@ -18,6 +18,7 @@
 							 <% end %>
 								<p>店名 : <%= favorite.store.storename %></p>
 								<p>場所 : <%= favorite.store.city %></p>
+								<p>お気に入り: 解除　</p>
 						<%= link_to store_favorite_path(store_id: favorite.store.id,id: favorite.id), method: :delete,  class: "glyphicon glyphicon-heart" do%>
                       		<% end %>
                       	<% end %>
