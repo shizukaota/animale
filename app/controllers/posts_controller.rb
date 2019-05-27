@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
 before_action :authenticate_user!
-before_action :correct_user, only: [:edit,:show,:update,:destroy]
-before_action :admin_user, only:[:destroy, :new, :create,:update,:edit]
+before_action :correct_user, only: [:show,:edit]
 
 def new
 	@store = Store.find(params[:store_id])
@@ -19,13 +18,9 @@ end
 
 
 def show
-	@store = Store.find(params[:id])
-	@post = Post.find(params[:id])
 end
 
 def edit
-    @user = User.find(params[:user_id])
-    @post = Post.find(params[:id])
 end
 
 
@@ -59,9 +54,11 @@ def post_params
 end
 
 def correct_user
-    user = User.find(params[:id])
-    if current_user != user
-    redirect_to root_path
+    @post = Post.find(params[:id])
+    @store = @post.store
+    @user = @post.user
+    if @user.id != current_user.id
+        redirect_to root_path
     end
 end
 

@@ -5,7 +5,7 @@ class SearchsController < ApplicationController
 	    @searchresult = Store.tagged_with(params[:pm]).page(params[:page]).reverse_order
     else
  	    @search = Store.ransack(params[:q])
-      @searchresults = @search.result.page(params[:page]).reverse_order
+      @searchresult = @search.result.page(params[:page]).reverse_order
     end
   end
 
