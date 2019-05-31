@@ -8,7 +8,6 @@ class StoresController < ApplicationController
     @store.tag_list = tags
     @store.storeimages.build
     @store.menus.build
-    @store.save
   end
 
   def create
@@ -50,7 +49,7 @@ class StoresController < ApplicationController
  def destroy
     store = Store.find(params[:id])
     store.destroy
-    redirect_to store_path(store)
+    redirect_to stores_path
  end
 
 
@@ -73,7 +72,7 @@ def admin_user
 end
 
 def store_params
-  params.require(:store).permit(:user_id, :storename, :image, :city, :category, :system, :place,:phone_number, :post, :tag_list, storeimages_attributes:[:id,:image,:_destroy ], menus_attributes:[:id, :drink, :food, :_destroy ])
+  params.require(:store).permit(:user_id, :storename, :image, :city, :category, :system, :place, :phone_number, :post, :tag_list, storeimages_attributes:[:id,:image,:_destroy ], menus_attributes:[:id, :drink, :food, :_destroy ])
 end
 
 end

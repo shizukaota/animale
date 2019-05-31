@@ -1,7 +1,7 @@
 # This migration comes from acts_as_taggable_on_engine (originally 1)
 class ActsAsTaggableOnMigration < ActiveRecord::Migration[5.2]
   def self.up
-    create_table :tags, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
+    create_table :tags,  do |t|
       t.string :name
     end
 
