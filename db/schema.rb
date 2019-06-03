@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2019_05_26_045936) do
     t.string "image_id"
     t.string "place"
     t.string "tag_list"
-    t.integer "phone_number"
+    t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
