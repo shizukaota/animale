@@ -11,16 +11,6 @@ class Store < ApplicationRecord
     acts_as_taggable_on :tag_list
     has_many :base_tags, through: :taggings, source: :tag, class_name: '::ActsAsTaggableOn::Tag',dependent: :destroy
 
-
-    validates  :storename, presence: true
-    validates :city, presence: true
-    validates :category, presence: true
-    validates :system, presence: true
-    validates :menu, presence: true
-    validates :place, presence: true
-    validates :phone_number, presence: true
-
-
     def favorited_by?(user)
         favorites.where(user_id: user.id).exists?
     end
