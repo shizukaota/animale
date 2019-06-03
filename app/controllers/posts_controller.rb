@@ -13,7 +13,7 @@ def create
     post.user_id = current_user.id
     post.store_id = @store.id
     post.save
-    redirect_to stores_path
+    redirect_to store_path(@store.id)
 end
 
 

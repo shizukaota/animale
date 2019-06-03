@@ -43,7 +43,7 @@
 
            <% @store.tag_list.each do |tag| %>
                <span style="background-color: pink; border-radius: 10px;"><%= tag %></span>
-            <% end %>
+           <% end %>
             <% if user_signed_in? %>
               <% if current_user.admin? %>
                   <%= link_to"編集", edit_store_path(@store.id) %>
@@ -54,13 +54,20 @@
 
             </div>
 
-            <div class="col-lg-6" >
+            <div class="col-lg-3" >
                <% @store.posts.each do |post| %>
                  <p> ニックネーム</p><%= post.user.nickname %>
-                 <p> クチコミ</p><%= post.comment %>
-               <% end %>
+                <% end %>
             </div>
+
+            <div class="col-lg-3" >
+              <% @store.posts.each do |post| %>
+               <p> クチコミ</p><%= post.comment %>
+              <% end %>
+            </div>
+
         </div>
+
 
           <div class="col-lg-12" >
 
@@ -68,7 +75,7 @@
                 <p>住所 <%= @store.place %></p>
                 <p>電話番号 <%= @store.phone_number %></p>
 
-                 <h4> 料金システム　<h4>
+                 <h4> 料金システム</h4>
                 <p><%= @store.system %></p>
 
               </div>
@@ -95,8 +102,7 @@
             </div>
 
       <div id="tab5" class="tab">
-          <p><%= @store.place %></p>
-
+　　　　　　　　<% if user_signed_in? %>
                 <%= form_for [@store,@post] do |f| %>
                 <div class="row">
                     <div class="col-sm-12">
@@ -106,6 +112,7 @@
                 </div>
                 <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
                 <% end %>
+              <% end %>
 
               <ol>
                   <% @store.posts.each do |post| %>
@@ -130,6 +137,8 @@
                   <% end %>
               </ol>
         </div>
+</div>
+
 <script>
 $('#tab-contents .tab[id != "tab1"]').hide();
 
