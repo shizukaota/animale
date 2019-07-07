@@ -1,6 +1,6 @@
 # Animale
 
-動物カフェの検索サイト　http://ec2-18-224-134-250.us-east-2.compute.amazonaws.com/stores
+動物カフェの検索サイト　http://ec2-18-224-134-250.us-east-2.compute.amazonaws.com/
 
 # 概要
 行きたい動物カフェをキーワード（店名、町、カテゴリー）やタグで検索できるサービスです
